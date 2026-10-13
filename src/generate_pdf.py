@@ -4,11 +4,11 @@ from reportlab.lib.pagesizes import letter
 from reportlab.lib import colors
 from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
 from reportlab.platypus import (
-    SimpleDocTemplate, Paragraph, Spacer, Table, TableStyle, PageBreak, KeepTogether, HRFlowable, ListFlowable, ListItem
+    SimpleDocTemplate, Paragraph, Spacer, Table, TableStyle, PageBreak, HRFlowable
 )
 from reportlab.pdfgen import canvas
 
-class ProfessionalCanvas(canvas.Canvas):
+class MonochromeCanvas(canvas.Canvas):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self._saved_page_states = []
@@ -28,21 +28,21 @@ class ProfessionalCanvas(canvas.Canvas):
     def draw_decorations(self, page_count):
         self.saveState()
         self.setFont("Helvetica", 8)
-        self.setFillColor(colors.HexColor("#64748B"))
+        self.setFillColor(colors.black)
         
-        # Running header on pages 2..N
+        # Header on pages 2..N
         if self._pageNumber > 1:
-            self.drawString(54, 750, "MoveInSync Play Store Ratings & Friction Analysis  |  Candidate Memo")
+            self.drawString(54, 750, "MoveInSync Play Store Ratings & Friction Analysis | Candidate Memo")
             self.drawRightString(558, 750, "October 2026")
-            self.setStrokeColor(colors.HexColor("#E2E8F0"))
-            self.setLineWidth(0.75)
+            self.setStrokeColor(colors.black)
+            self.setLineWidth(0.5)
             self.line(54, 742, 558, 742)
 
-        # Running footer on all pages
-        self.drawString(54, 34, "MoveInSync Forward Deployed Engineer Assignment  •  Prepared by Jhanvi")
-        self.drawRightString(558, 34, f"{self._pageNumber} of {page_count}")
-        self.setStrokeColor(colors.HexColor("#E2E8F0"))
-        self.setLineWidth(0.75)
+        # Footer on all pages
+        self.drawString(54, 34, "MoveInSync Forward Deployed Engineer Assignment • Prepared by Jhanvi")
+        self.drawRightString(558, 34, f"Page {self._pageNumber} of {page_count}")
+        self.setStrokeColor(colors.black)
+        self.setLineWidth(0.5)
         self.line(54, 44, 558, 44)
         
         self.restoreState()
@@ -61,49 +61,43 @@ def build_pdf(filename="reports/MoveInSync_Ratings_Executive_Submission.pdf"):
 
     styles = getSampleStyleSheet()
 
-    # Palette
-    c_primary = colors.HexColor("#0F172A")    # Deep Navy
-    c_blue    = colors.HexColor("#1D4ED8")    # Clean Royal Blue
-    c_dark    = colors.HexColor("#1E293B")    # Slate Charcoal
-    c_muted   = colors.HexColor("#475569")    # Subdued Muted Slate
-    c_border  = colors.HexColor("#CBD5E1")
-
+    # Pure monochrome styling
     title_style = ParagraphStyle(
         'DocTitle',
         parent=styles['Normal'],
         fontName='Helvetica-Bold',
-        fontSize=20,
-        leading=25,
-        textColor=c_primary,
+        fontSize=18,
+        leading=22,
+        textColor=colors.black,
         spaceAfter=3
     )
     subtitle_style = ParagraphStyle(
         'DocSubtitle',
         parent=styles['Normal'],
         fontName='Helvetica',
-        fontSize=10,
-        leading=14,
-        textColor=c_muted,
-        spaceAfter=12
+        fontSize=9.5,
+        leading=13.5,
+        textColor=colors.black,
+        spaceAfter=10
     )
     sec_heading = ParagraphStyle(
         'SecHeading',
         parent=styles['Normal'],
         fontName='Helvetica-Bold',
-        fontSize=12,
-        leading=16,
-        textColor=c_blue,
-        spaceBefore=11,
-        spaceAfter=5,
+        fontSize=11.5,
+        leading=15,
+        textColor=colors.black,
+        spaceBefore=10,
+        spaceAfter=4,
         keepWithNext=True
     )
     sub_heading = ParagraphStyle(
         'SubHeading',
         parent=styles['Normal'],
         fontName='Helvetica-Bold',
-        fontSize=10,
-        leading=13.5,
-        textColor=c_primary,
+        fontSize=9.5,
+        leading=13,
+        textColor=colors.black,
         spaceBefore=7,
         spaceAfter=3,
         keepWithNext=True
@@ -112,27 +106,19 @@ def build_pdf(filename="reports/MoveInSync_Ratings_Executive_Submission.pdf"):
         'BodyCustom',
         parent=styles['Normal'],
         fontName='Helvetica',
-        fontSize=9,
-        leading=13.5,
-        textColor=c_dark,
-        spaceAfter=5
-    )
-    item_title = ParagraphStyle(
-        'ItemTitle',
-        parent=styles['Normal'],
-        fontName='Helvetica-Bold',
-        fontSize=9,
+        fontSize=8.8,
         leading=13,
-        textColor=c_primary
+        textColor=colors.black,
+        spaceAfter=5
     )
     bullet_style = ParagraphStyle(
         'BulletCustom',
         parent=styles['Normal'],
         fontName='Helvetica',
-        fontSize=8.8,
-        leading=13,
-        textColor=c_dark,
-        leftIndent=14,
+        fontSize=8.5,
+        leading=12.5,
+        textColor=colors.black,
+        leftIndent=12,
         spaceAfter=3
     )
     t_header = ParagraphStyle(
@@ -141,7 +127,7 @@ def build_pdf(filename="reports/MoveInSync_Ratings_Executive_Submission.pdf"):
         fontName='Helvetica-Bold',
         fontSize=8,
         leading=11,
-        textColor=c_primary
+        textColor=colors.black
     )
     t_cell = ParagraphStyle(
         'TCell',
@@ -149,7 +135,7 @@ def build_pdf(filename="reports/MoveInSync_Ratings_Executive_Submission.pdf"):
         fontName='Helvetica',
         fontSize=8,
         leading=11,
-        textColor=c_dark
+        textColor=colors.black
     )
 
     story = []
@@ -158,8 +144,8 @@ def build_pdf(filename="reports/MoveInSync_Ratings_Executive_Submission.pdf"):
     # PAGE 1: CONTEXT, THE PARADOX & REAL COMPLAINT DRIVERS
     # =========================================================================
     story.append(Paragraph("Why MoveInSync's Play Store Ratings Sit Where They Do", title_style))
-    story.append(Paragraph("A Technical Deep-Dive & Action Plan for Engineering  |  Target App: <code>com.moveinsync.ets</code>", subtitle_style))
-    story.append(HRFlowable(width="100%", thickness=1.5, color=c_blue, spaceBefore=0, spaceAfter=10))
+    story.append(Paragraph("A Technical Deep-Dive & Action Plan for Engineering | Target App: com.moveinsync.ets", subtitle_style))
+    story.append(HRFlowable(width="100%", thickness=1, color=colors.black, spaceBefore=0, spaceAfter=8))
 
     story.append(Paragraph("The Reality Behind the 4.64 Headline Score", sec_heading))
     story.append(Paragraph(
@@ -169,42 +155,43 @@ def build_pdf(filename="reports/MoveInSync_Ratings_Executive_Submission.pdf"):
         body_style
     ))
     story.append(Paragraph(
-        "When I analyzed the full 12-year history (2014–2026), I found this is <b>not an overnight crash from a recent release</b>. "
+        "When I analyzed the full 12-year history (2014-2026), I found this is <b>not an overnight crash from a recent release</b>. "
         "It is a chronic, stubborn reality. Written ratings have slowly climbed from 3.45 in 2022 to ~3.85 in 2026, but the same core friction points "
         "continue to drag down everyday commuter satisfaction.",
         body_style
     ))
 
-    # Clean KPI Comparison Table
+    # Clean Monochrome KPI Table
     kpi_data = [
         [Paragraph("Perspective", t_header), Paragraph("Store Score (Cumulative)", t_header), Paragraph("Written Reviews (Last 90 Days)", t_header), Paragraph("What It Means", t_header)],
-        [Paragraph("Average Rating", t_cell), Paragraph("⭐ 4.64 (114,881 ratings)", t_cell), Paragraph("⭐ 3.81 (721 reviews)", t_cell), Paragraph("Vocal riders experience a 0.83-star drop vs passive raters", t_cell)],
-        [Paragraph("1–2 Star Share", t_cell), Paragraph("7.1% (8,154 total)", t_cell), Paragraph("28.4% (205 reviews)", t_cell), Paragraph("Severe complaints are 4x higher among active reviewers", t_cell)],
+        [Paragraph("Average Rating", t_cell), Paragraph("4.64 (114,881 ratings)", t_cell), Paragraph("3.81 (721 reviews)", t_cell), Paragraph("Vocal riders experience a 0.83-star drop vs passive raters", t_cell)],
+        [Paragraph("1-2 Star Share", t_cell), Paragraph("7.1% (8,154 total)", t_cell), Paragraph("28.4% (205 reviews)", t_cell), Paragraph("Severe complaints are 4x higher among active reviewers", t_cell)],
         [Paragraph("Trajectory", t_cell), Paragraph("Creeping up gradually", t_cell), Paragraph("Flat vs prior 90d (3.82, 27%)", t_cell), Paragraph("Passive 5-star ratings hide persistent software friction", t_cell)]
     ]
     t_kpi = Table(kpi_data, colWidths=[90, 125, 135, 154])
     t_kpi.setStyle(TableStyle([
-        ('BACKGROUND', (0,0), (-1,0), colors.HexColor("#F8FAFC")),
-        ('GRID', (0,0), (-1,-1), 0.5, c_border),
+        ('LINEBELOW', (0,0), (-1,0), 1, colors.black),
+        ('LINEBELOW', (0,-1), (-1,-1), 1, colors.black),
+        ('GRID', (0,0), (-1,-1), 0.5, colors.black),
         ('VALIGN', (0,0), (-1,-1), 'TOP'),
-        ('TOPPADDING', (0,0), (-1,-1), 4),
-        ('BOTTOMPADDING', (0,0), (-1,-1), 4),
+        ('TOPPADDING', (0,0), (-1,-1), 3.5),
+        ('BOTTOMPADDING', (0,0), (-1,-1), 3.5),
     ]))
     story.append(t_kpi)
-    story.append(Spacer(1, 8))
+    story.append(Spacer(1, 6))
 
     story.append(Paragraph("What Commuters Actually Complain About", sec_heading))
     story.append(Paragraph(
-        "By classifying recent low-star reviews (Feb–Oct 2026 cohort, n = 434) using an LLM taxonomy verified against ground-truth labels, "
+        "By classifying recent low-star reviews (Feb-Oct 2026 cohort, n = 434) using an LLM taxonomy verified against ground-truth labels, "
         "the real friction clusters clearly into a handful of functional areas:",
         body_style
     ))
 
     breakdown_data = [
         [Paragraph("Complaint Category", t_header), Paragraph("Share of Complaints", t_header), Paragraph("Likely Owner", t_header), Paragraph("Est. 90-Day Rating Lift", t_header)],
-        [Paragraph("<b>App Won't Open / Crashes / Freezes</b>", t_cell), Paragraph("<b>15.7%</b> (Spiked to <b>31.7%</b> in last 30d)", t_cell), Paragraph("Mobile App Engineering", t_cell), Paragraph("<b>+0.08 to +0.17</b>", t_cell)],
-        [Paragraph("<b>Login & OTP Delivery Failures</b>", t_cell), Paragraph("<b>11.7%</b> (Severe blocker; 2.98/5 sev)", t_cell), Paragraph("Backend / Enterprise IT", t_cell), Paragraph("<b>+0.06 to +0.13</b>", t_cell)],
-        [Paragraph("<b>Inaccurate Route, ETA & GPS Tracking</b>", t_cell), Paragraph("<b>~15.0%</b> (Route 9.0% + GPS 6.3%)", t_cell), Paragraph("Backend Routing & Product", t_cell), Paragraph("<b>+0.08 to +0.16</b>", t_cell)],
+        [Paragraph("<b>App Won't Open / Crashes / Freezes</b>", t_cell), Paragraph("<b>15.7%</b> (Spiked to <b>31.7%</b> in last 30d)", t_cell), Paragraph("Mobile App Engineering", t_cell), Paragraph("+0.08 to +0.17", t_cell)],
+        [Paragraph("<b>Login & OTP Delivery Failures</b>", t_cell), Paragraph("<b>11.7%</b> (Severe blocker; 2.98/5 sev)", t_cell), Paragraph("Backend / Enterprise IT", t_cell), Paragraph("+0.06 to +0.13", t_cell)],
+        [Paragraph("<b>Inaccurate Route, ETA & GPS Tracking</b>", t_cell), Paragraph("<b>~15.0%</b> (Route 9.0% + GPS 6.3%)", t_cell), Paragraph("Backend Routing & Product", t_cell), Paragraph("+0.08 to +0.16", t_cell)],
         [Paragraph("<b>Self-Booking Failures</b>", t_cell), Paragraph("7.4% (Roster sync / cutoffs)", t_cell), Paragraph("Backend Roster Systems", t_cell), Paragraph("+0.04 to +0.08", t_cell)],
         [Paragraph("<b>Late Cab / Driver No-Show</b>", t_cell), Paragraph("5.5% (Dispatch delays)", t_cell), Paragraph("Fleet Operations", t_cell), Paragraph("+0.03 to +0.06", t_cell)],
         [Paragraph("<b>Support Helpdesk Unresponsive</b>", t_cell), Paragraph("5.1% (Ticket resolution)", t_cell), Paragraph("Support Team", t_cell), Paragraph("+0.02 to +0.05", t_cell)],
@@ -212,34 +199,34 @@ def build_pdf(filename="reports/MoveInSync_Ratings_Executive_Submission.pdf"):
     ]
     t_breakdown = Table(breakdown_data, colWidths=[140, 140, 115, 109])
     t_breakdown.setStyle(TableStyle([
-        ('BACKGROUND', (0,0), (-1,0), colors.HexColor("#EFF6FF")),
-        ('GRID', (0,0), (-1,-1), 0.5, c_border),
+        ('LINEBELOW', (0,0), (-1,0), 1, colors.black),
+        ('LINEBELOW', (0,-1), (-1,-1), 1, colors.black),
+        ('GRID', (0,0), (-1,-1), 0.5, colors.black),
         ('VALIGN', (0,0), (-1,-1), 'TOP'),
-        ('TOPPADDING', (0,0), (-1,-1), 3.5),
-        ('BOTTOMPADDING', (0,0), (-1,-1), 3.5),
+        ('TOPPADDING', (0,0), (-1,-1), 3),
+        ('BOTTOMPADDING', (0,0), (-1,-1), 3),
     ]))
     story.append(t_breakdown)
-    story.append(Spacer(1, 8))
+    story.append(Spacer(1, 6))
 
-    # Executive takeaway banner
-    banner_text = [
+    # Clean monochrome key takeaway box
+    takeaway_data = [
         [Paragraph(
-            "<b>The Core Finding:</b> Crashes and Login failures together represent <b>over 27% of all low-star reviews</b>. "
+            "<b>Key Takeaway for Leadership:</b> Crashes and Login failures together represent <b>over 27% of all low-star reviews</b>. "
             "These are not subjective design complaints—they completely lock employees out of their work commute. "
             "Fixing these two issues alone delivers an immediate estimated lift of <b>+0.14 to +0.30</b> on written reviews.",
-            ParagraphStyle('BannerText', parent=styles['Normal'], fontName='Helvetica', fontSize=8.5, leading=12, textColor=colors.HexColor("#1E3A8A"))
+            body_style
         )]
     ]
-    t_banner = Table(banner_text, colWidths=[504])
-    t_banner.setStyle(TableStyle([
-        ('BACKGROUND', (0,0), (-1,-1), colors.HexColor("#DBEAFE")),
-        ('BOX', (0,0), (-1,-1), 1, colors.HexColor("#3B82F6")),
-        ('LEFTPADDING', (0,0), (-1,-1), 10),
-        ('RIGHTPADDING', (0,0), (-1,-1), 10),
-        ('TOPPADDING', (0,0), (-1,-1), 6),
-        ('BOTTOMPADDING', (0,0), (-1,-1), 6),
+    t_takeaway = Table(takeaway_data, colWidths=[504])
+    t_takeaway.setStyle(TableStyle([
+        ('BOX', (0,0), (-1,-1), 0.75, colors.black),
+        ('LEFTPADDING', (0,0), (-1,-1), 8),
+        ('RIGHTPADDING', (0,0), (-1,-1), 8),
+        ('TOPPADDING', (0,0), (-1,-1), 5),
+        ('BOTTOMPADDING', (0,0), (-1,-1), 5),
     ]))
-    story.append(t_banner)
+    story.append(t_takeaway)
 
     story.append(PageBreak())
 
@@ -255,32 +242,32 @@ def build_pdf(filename="reports/MoveInSync_Ratings_Executive_Submission.pdf"):
     story.append(Spacer(1, 4))
 
     # --- TICKET 1 ---
-    story.append(Paragraph("Ticket 1: App Won’t Open & Startup Crashes (Priority #1)", sub_heading))
-    story.append(Paragraph("<b>Primary Team:</b> Mobile App Engineering &nbsp;|&nbsp; <b>Complaint Share:</b> 15.7% (spiked to 31.7% in last 30d) &nbsp;|&nbsp; <b>Expected Lift:</b> +0.08 to +0.17", bullet_style))
+    story.append(Paragraph("Ticket 1: App Won't Open & Startup Crashes (Priority #1)", sub_heading))
+    story.append(Paragraph("<b>Primary Team:</b> Mobile App Engineering | <b>Complaint Share:</b> 15.7% (spiked to 31.7% in last 30d) | <b>Expected Lift:</b> +0.08 to +0.17", bullet_style))
     story.append(Paragraph("• <b>Direct User Evidence:</b> <i>'whenever i update this app, i am not able to open the app again, I need to uninstall and reinstall again'</i> (9 Oct 2026); <i>'Doesn't Open, always gets stuck... tried all options reinstall, upgrade'</i> (12 Aug 2026, v12.17.0).", bullet_style))
     story.append(Paragraph("• <b>Working Hypothesis:</b> Corrupted local SQLite cache or broken schema migration on app update, clustering on specific Android OEM flavors (MIUI/ColorOS) or background task limits in Android 14+.", bullet_style))
-    story.append(Paragraph("• <b>Validation Step:</b> Pull crash traces and ANR logs from Google Play Console Android Vitals filtered by releases 12.18–12.20 and device models.", bullet_style))
-    story.append(Paragraph("• <b>What to Ship:</b> Fix top 3 crash signatures; wrap startup migrations in defensive try-catch fallbacks with local reset; enforce staged rollouts (10% → 25% → 100%) with automated pause on crash spikes.", bullet_style))
+    story.append(Paragraph("• <b>Validation Step:</b> Pull crash traces and ANR logs from Google Play Console Android Vitals filtered by releases 12.18-12.20 and device models.", bullet_style))
+    story.append(Paragraph("• <b>What to Ship:</b> Fix top 3 crash signatures; wrap startup migrations in defensive try-catch fallbacks with local reset; enforce staged rollouts (10% -> 25% -> 100%) with automated pause on crash spikes.", bullet_style))
     story.append(Paragraph("• <b>Success Criteria:</b> Crash-free session rate > 99.5% on Android Vitals; <code>crash_lag</code> drops to <b>under 8%</b> of low-star reviews within 60 days.", bullet_style))
-    story.append(Spacer(1, 6))
+    story.append(Spacer(1, 5))
 
     # --- TICKET 2 ---
     story.append(Paragraph("Ticket 2: Login & OTP Failures / Session Dropouts (Priority #2)", sub_heading))
-    story.append(Paragraph("<b>Primary Team:</b> App Eng, Backend Auth & Enterprise IT &nbsp;|&nbsp; <b>Complaint Share:</b> 11.7% &nbsp;|&nbsp; <b>Expected Lift:</b> +0.06 to +0.13", bullet_style))
+    story.append(Paragraph("<b>Primary Team:</b> App Eng, Backend Auth & Enterprise IT | <b>Complaint Share:</b> 11.7% | <b>Expected Lift:</b> +0.06 to +0.13", bullet_style))
     story.append(Paragraph("• <b>Direct User Evidence:</b> <i>'Didn't get any otp to login'</i> (3 Jun 2026); <i>'I am not receiving the OTP even after trying multiple times'</i> (24 Sep 2026); <i>'email otp system don't work everyday have to login via otp'</i> (2 Jun 2026).", bullet_style))
     story.append(Paragraph("• <b>Working Hypothesis:</b> SMS gateway timeouts across specific telecom carriers, corporate mail spam filtering for OTPs, and overly aggressive session invalidation forcing daily re-logins.", bullet_style))
-    story.append(Paragraph("• <b>Validation Step:</b> Instrument an end-to-end OTP funnel (Request → Gateway Sent → Delivered → Verified) segmented by SMS provider, carrier, and corporate email domain.", bullet_style))
+    story.append(Paragraph("• <b>Validation Step:</b> Instrument an end-to-end OTP funnel (Request -> Gateway Sent -> Delivered -> Verified) segmented by SMS provider, carrier, and corporate email domain.", bullet_style))
     story.append(Paragraph("• <b>What to Ship:</b> Multi-gateway automatic SMS failover (switch provider if unconfirmed after 25s); add instant WhatsApp/Email backup channels; introduce biometrics to extend refresh token lifetimes safely.", bullet_style))
     story.append(Paragraph("• <b>Success Criteria:</b> P95 OTP delivery under 15 seconds; delivery success > 98.5%; <code>login_otp</code> complaints fall to <b>under 6%</b> within 60 days.", bullet_style))
-    story.append(Spacer(1, 6))
+    story.append(Spacer(1, 5))
 
     # --- TICKET 3 ---
     story.append(Paragraph("Ticket 3: Route Inefficiency & Live Tracking Jumps (Priority #3)", sub_heading))
-    story.append(Paragraph("<b>Primary Team:</b> Backend Routing Engine & Product &nbsp;|&nbsp; <b>Complaint Share:</b> ~15.0% combined &nbsp;|&nbsp; <b>Expected Lift:</b> +0.08 to +0.16", bullet_style))
+    story.append(Paragraph("<b>Primary Team:</b> Backend Routing Engine & Product | <b>Complaint Share:</b> ~15.0% combined | <b>Expected Lift:</b> +0.08 to +0.16", bullet_style))
     story.append(Paragraph("• <b>Direct User Evidence:</b> <i>'Terrible tracking, the ETA keeps increasing until the vehicle is 2-3 stops away. Then it decreases suddenly'</i> (3 Jun 2026); <i>'terrible routing - picks the wrong and longer route'</i> (14 Aug 2026).", bullet_style))
     story.append(Paragraph("• <b>Working Hypothesis:</b> Gaps in driver phone GPS pings (battery saver throttling), unbuffered ETA recalculations causing jumping arrival estimates, and detours that feel excessive to riders.", bullet_style))
     story.append(Paragraph("• <b>Validation Step:</b> Benchmark predicted ETA against actual GPS arrival time across a sample of 1,000 live commuter trips; audit driver app location heartbeat frequency.", bullet_style))
-    story.append(Paragraph("• <b>What to Ship:</b> Display confidence windows (e.g. '8–12 mins' instead of jumpy exact times); show a clear 'Last updated X secs ago' status; enforce driver GPS ping intervals during active trips.", bullet_style))
+    story.append(Paragraph("• <b>What to Ship:</b> Display confidence windows (e.g. '8-12 mins' instead of jumpy exact times); show a clear 'Last updated X secs ago' status; enforce driver GPS ping intervals during active trips.", bullet_style))
     story.append(Paragraph("• <b>Success Criteria:</b> Mean Absolute Error on arrival ETA under 3 minutes; combined route/tracking complaints drop to <b>under 10%</b> within 90 days.", bullet_style))
 
     story.append(PageBreak())
@@ -289,7 +276,7 @@ def build_pdf(filename="reports/MoveInSync_Ratings_Executive_Submission.pdf"):
     # PAGE 3: METHODOLOGY, REPRODUCIBILITY & TOOLS USED
     # =========================================================================
     story.append(Paragraph("How I Built This & The Tools I Used", sec_heading))
-    story.append(Paragraph("<i>A transparent summary of my methodology, validation steps, and reproducibility pipeline.</i>", subtitle_style))
+    story.append(Paragraph("A transparent summary of my methodology, validation steps, and reproducibility pipeline.", subtitle_style))
 
     story.append(Paragraph("My Analytical Workflow", sub_heading))
     story.append(Paragraph(
@@ -298,20 +285,20 @@ def build_pdf(filename="reports/MoveInSync_Ratings_Executive_Submission.pdf"):
         body_style
     ))
     story.append(Paragraph(
-        "2. <b>Cleaning & Taxonomy Design:</b> I filtered 3,178 eligible reviews (last 24 months, ≥3 words). To prevent distortion, I isolated 190 short negative reviews (like <i>'worst app'</i>) as <code>low_no_detail</code> so they wouldn't artificially inflate specific engineering buckets. "
+        "2. <b>Cleaning & Taxonomy Design:</b> I filtered 3,178 eligible reviews (last 24 months, >=3 words). To prevent distortion, I isolated 190 short negative reviews (like <i>'worst app'</i>) as <code>low_no_detail</code> so they wouldn't artificially inflate specific engineering buckets. "
         "I then built a 19-label mutually exclusive taxonomy mapped across 9 commuter journey stages.",
         body_style
     ))
     story.append(Paragraph(
-        "3. <b>LLM Classification with Schema Validation:</b> I classified the recent cohort using Claude 3.5 Haiku via OpenRouter at temperature 0. I used strict Pydantic schema validation to reliably extract the primary theme, secondary themes, severity (1–5), suspected team owner, and exact evidence quotes.",
+        "3. <b>LLM Classification with Schema Validation:</b> I classified the recent cohort using Claude 3.5 Haiku via OpenRouter at temperature 0. I used strict Pydantic schema validation to reliably extract the primary theme, secondary themes, severity (1-5), suspected team owner, and exact evidence quotes.",
         body_style
     ))
     story.append(Paragraph(
-        "4. <b>Ground Truth Validation:</b> I benchmarked model outputs against an independently audited gold standard dataset (n = 27). The classifier achieved <b>Cohen’s Kappa κ = 0.87</b> (89.0% theme agreement), <b>κ = 0.67</b> (81.0% owner agreement), and <b>100% agreement</b> on distinguishing complaints from positive feedback.",
+        "4. <b>Ground Truth Validation:</b> I benchmarked model outputs against an independently audited gold standard dataset (n = 27). The classifier achieved <b>Cohen’s Kappa = 0.87</b> (89.0% theme agreement), <b>= 0.67</b> (81.0% owner agreement), and <b>100% agreement</b> on distinguishing complaints from positive feedback.",
         body_style
     ))
     story.append(Paragraph(
-        "5. <b>Statistical Testing & Lift Modeling:</b> An initial inspection suggested version 12.19.0 might be a severe regression. I ran a pooled two-proportion hypothesis test, which yielded <b>z = 1.40 (p ≈ 0.16)</b>—confirming it was within normal sample variation rather than an isolated release disaster. "
+        "5. <b>Statistical Testing & Lift Modeling:</b> An initial inspection suggested version 12.19.0 might be a severe regression. I ran a pooled two-proportion hypothesis test, which yielded <b>z = 1.40 (p approx 0.16)</b>—confirming it was within normal sample variation rather than an isolated release disaster. "
         "I then built a mathematical simulation to estimate rating lifts across conservative (+0.23) and optimistic (+0.49) resolution scenarios.",
         body_style
     ))
@@ -324,7 +311,7 @@ def build_pdf(filename="reports/MoveInSync_Ratings_Executive_Submission.pdf"):
     story.append(Paragraph("• <b>Interactive Dashboard:</b> <code>streamlit</code>, <code>plotly</code> (multi-view operational interface with cached loaders).", bullet_style))
     story.append(Paragraph("• <b>Automation & CI/CD:</b> GitHub Actions (<code>.github/workflows/weekly.yml</code>), Git, PyYAML.", bullet_style))
 
-    story.append(Spacer(1, 6))
+    story.append(Spacer(1, 5))
     story.append(Paragraph("Answering 'How Are Our Ratings?' on a Regular Basis", sub_heading))
     story.append(Paragraph(
         "Because this is an ongoing question rather than a one-time exercise, I automated the entire pipeline with a GitHub Actions workflow (<code>weekly.yml</code>). "
@@ -336,7 +323,7 @@ def build_pdf(filename="reports/MoveInSync_Ratings_Executive_Submission.pdf"):
     story.append(PageBreak())
 
     # =========================================================================
-    # PAGE 4: INTERACTIVE DASHBOARD SHOWCASE (CLEAN SCREENSHOT PLACEHOLDERS)
+    # PAGE 4: DASHBOARD & SUBMISSION DETAILS (CLEAN BLANK PAGE FOR SCREENSHOTS)
     # =========================================================================
     story.append(Paragraph("Interactive Ratings Intelligence Dashboard", sec_heading))
     story.append(Paragraph(
@@ -347,55 +334,32 @@ def build_pdf(filename="reports/MoveInSync_Ratings_Executive_Submission.pdf"):
     ))
     story.append(Spacer(1, 8))
 
-    # Placeholder Box 1
-    ph1 = [
-        [Paragraph(
-            "<font size='9' color='#1E293B'><b>Dashboard View 1: Headline KPIs & 12-Year Historical Trend</b></font><br/><br/>"
-            "<font size='8' color='#64748B'><i>[ Paste screenshot of Overview Tab here ]<br/>"
-            "Displays the 4.64 Store Score vs. 3.81 90-Day Written Average, Star Distributions, and the 2014–2026 Volume Timeline.</i></font><br/><br/>",
-            ParagraphStyle('PH1_Text', parent=styles['Normal'], alignment=1)
-        )]
+    meta_table_data = [
+        [Paragraph("Repository URL", t_header), Paragraph("https://github.com/jhanvi-11/moveinsync-ratings", t_cell)],
+        [Paragraph("Dashboard Command", t_header), Paragraph("streamlit run app/dashboard.py", t_cell)],
+        [Paragraph("Core Views", t_header), Paragraph("1. Overview & Rolling Timeline (2014-2026)<br/>2. Complaint Taxonomy Pareto & Suspected Ownership<br/>3. Rating Lift Simulator & Prioritized Action Tickets", t_cell)],
+        [Paragraph("Data Storage", t_header), Paragraph("Local SQLite (data/reviews.db) with 24,318 deduplicated reviews", t_cell)]
     ]
-    t_ph1 = Table(ph1, colWidths=[504])
-    t_ph1.setStyle(TableStyle([
-        ('BACKGROUND', (0,0), (-1,-1), colors.HexColor("#F8FAFC")),
-        ('BOX', (0,0), (-1,-1), 1, colors.HexColor("#94A3B8")),
-        ('TOPPADDING', (0,0), (-1,-1), 36),
-        ('BOTTOMPADDING', (0,0), (-1,-1), 36),
-        ('ALIGN', (0,0), (-1,-1), 'CENTER'),
+    t_meta = Table(meta_table_data, colWidths=[120, 384])
+    t_meta.setStyle(TableStyle([
+        ('LINEBELOW', (0,0), (-1,0), 1, colors.black),
+        ('LINEBELOW', (0,-1), (-1,-1), 1, colors.black),
+        ('GRID', (0,0), (-1,-1), 0.5, colors.black),
+        ('VALIGN', (0,0), (-1,-1), 'TOP'),
+        ('TOPPADDING', (0,0), (-1,-1), 4),
+        ('BOTTOMPADDING', (0,0), (-1,-1), 4),
     ]))
-    story.append(t_ph1)
+    story.append(t_meta)
     story.append(Spacer(1, 14))
 
-    # Placeholder Box 2
-    ph2 = [
-        [Paragraph(
-            "<font size='9' color='#1E293B'><b>Dashboard View 2: Complaint Breakdown, Ownership & Action Tickets</b></font><br/><br/>"
-            "<font size='8' color='#64748B'><i>[ Paste screenshot of Deep-Dive / Backlog Tab here ]<br/>"
-            "Displays the Pareto of 1–2 star complaint themes, team ownership allocation, rating lift simulator, and detailed tickets.</i></font><br/><br/>",
-            ParagraphStyle('PH2_Text', parent=styles['Normal'], alignment=1)
-        )]
-    ]
-    t_ph2 = Table(ph2, colWidths=[504])
-    t_ph2.setStyle(TableStyle([
-        ('BACKGROUND', (0,0), (-1,-1), colors.HexColor("#F8FAFC")),
-        ('BOX', (0,0), (-1,-1), 1, colors.HexColor("#94A3B8")),
-        ('TOPPADDING', (0,0), (-1,-1), 36),
-        ('BOTTOMPADDING', (0,0), (-1,-1), 36),
-        ('ALIGN', (0,0), (-1,-1), 'CENTER'),
-    ]))
-    story.append(t_ph2)
-    story.append(Spacer(1, 12))
+    story.append(Paragraph("Dashboard Visual Walkthrough", sub_heading))
+    story.append(Paragraph(
+        "The space below is reserved for inserting screenshots of the local Streamlit dashboard (Overview Timeline and Complaint/Backlog views) prior to final distribution.",
+        body_style
+    ))
 
-    footer_note = Paragraph(
-        "<b>Run Locally:</b> <code>streamlit run app/dashboard.py</code> &nbsp;&nbsp;|&nbsp;&nbsp; "
-        "<b>Code Repository:</b> <code>https://github.com/jhanvi-11/moveinsync-ratings</code>",
-        ParagraphStyle('FooterNote', parent=styles['Normal'], fontName='Helvetica', fontSize=8.5, leading=12, textColor=c_muted, alignment=1)
-    )
-    story.append(footer_note)
-
-    doc.build(story, canvasmaker=ProfessionalCanvas)
-    print(f"Professional human-written PDF generated at {filename}")
+    doc.build(story, canvasmaker=MonochromeCanvas)
+    print(f"Monochrome clean PDF successfully created at {filename}")
 
 
 if __name__ == "__main__":
