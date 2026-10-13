@@ -1,0 +1,28 @@
+review_id,rating,text,primary_theme,suspected_owner,notes
+9c3a7855-c1f5-492e-b7cb-6508a971befd,2,don't show exact time of ride 😔,wrong_route_eta,backend_routing
+773466c7-be26-4694-a9ed-de943f2c80c9,3,more number of taps required. navigation is not user-friendly,ui_confusion,app_engineering
+39460e88-a834-4afb-99b6-2c9694b3590a,5,quick and real time update,praise,unclear
+b05e04c1-d010-4cd2-8866-6a05a4aafbe4,5,Good and easy to operate,praise,unclear
+28444777-0ec6-4902-bb49-81e1af54b32b,1,way more downgrade rather than shift can.Chamging an address requires too much effort as u can not recognize where u want to locate,ui_confusion,app_engineering
+5fadff5a-d9f6-4001-b8c7-86e5adb0998f,2,The app keeps uninstalling and asks to be reinstalled. Please fix this.,crash_lag,app_engineering
+9eda3141-29d5-4b16-918d-5a255cbe7893,1,worst app that company can force upon you,other,client_policy
+2a42eb99-eb5e-4077-91ff-297cc7c99303,2,Does not allow me to make amendments even though it is made immediately after incorrect booking,booking_failure,app_engineering
+0b563830-cd9d-4d2f-bca5-d0b065523a38,1,slow and uncertainties,crash_lag,app_engineering
+9dd4ac02-19d4-4650-9a90-f510b523e0ab,2,Please stop excessively notifying for Play Store reviews after every ride. It's wasting user time by repeated clicks.,rating_prompt,app_engineering
+f7551505-b053-42d1-af7c-5eda85114dcc,2,"the new update looks confusing including the font color of ""logout"" is red like the font color of ""cancel"" Also the ""book"" tab became smaller",ui_confusion,app_engineering
+3b8ea3b9-b52b-4c34-9b1f-cd7a8c93d7ff,1,"-still as horrible as it can be. I had the details loaded on my wifi. I stepped in a no network zone and it logged me out! what security you need that you would log out a user if no network for just some seconds. absolutely sick idiots wasting mornings since years. -stupid app, worse routing algo. picked me up first, then second, and came back to my society after 30 mins for third pickup. -clicking on View ETA opens maps, but adds KING confident speaking before my home address, maybe hacked",wrong_route_eta,app_engineering
+b444516d-9a24-4cbd-b3ba-4b11f065a67f,4,"New interface is better. Currently the only App shortcuts available are 'Create schedule' & 'Bus'. MoveInSync should allow QR code scanner as an App shortcut along with. Rather than going in to the app everytime, an App shortcut for QR code scanner makes things even better.",feature_request,app_engineering
+ecf3d203-34c4-467b-8ab9-8c3999e61376,4,App is very good but still room for improvement. Need to give acces tobuser for No Show option. so that cab driver should get notification and 2nd is user should have access to make his default.,feature_request,app_engineering
+9bbf13d3-22fc-4a92-afac-cd5b210ea7d5,5,Overall Good experience,praise,unclear
+0689f1e3-9390-45b6-acfd-da2906524abf,5,best app with necessities,praise,unclear
+c025c564-55e4-4c74-9741-f3577da10e2a,1,"SAP employee, got logged out and now shows web login error, not able to book vehicle since one week",booking_failure,app_engineering
+8fdebe44-30d5-4894-b96a-ccc6c5998d4a,1,trip rating is disabled,other,app_engineering
+aba58a88-e9df-4fb2-ab85-c2d5bce1a8f3,3,the Real time GPS moving is inaccurate at times. otherwise it's a gud app,live_tracking_gps,app_engineering
+3b496343-6d57-4b65-9438-35e18b2d5f0f,3,"good ... but it takes a lot of time to reload... & location is not accurate, little bit issues... & while opening application - every i have to accept the transport policies by clicking i agree... feel a little bit lag ,",crash_lag,app_engineering
+c349d5f4-65c1-444a-aa69-670da8eebaeb,2,again and again it's getting stopped.. showing that it can't open as it is not downloaded from playstore. in last 3 weeks I uninstall an installed it for 10 times due to the same error,crash_lag,app_engineering
+4e3820a7-aac3-4c54-aa6c-2b2f1bd1ddc4,3,app is not opening properly,crash_lag,app_engineering
+4e3e76f1-74dd-485b-9746-9af96470c140,1,"I am not able to login what is going wrong, where am I wrong please help me out",login_otp,app_engineering
+dba61dc5-b7e3-482a-a596-5be145a9e1e4,1,I keep getting pop-ups regarding cab delay notification. one notification would be sufficient but I keep getting pop-ups every few minutes.,notifications,app_engineering
+fc52fe39-39e5-4a95-ad80-2647cf087b97,4,good user friendly app gives real-time update,praise,unclear
+7eb737f8-071d-4fc9-aeda-3ceee47c1034,1,can't change address,feature_request,app_engineering
+2109668e-b908-4604-a7c0-dc526e27ea9e,1,one of the worst services drivers don't know how to behave with employees and movein sync won't train them as well very worst service travel world is best,driver_behavior,operations

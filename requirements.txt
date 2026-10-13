@@ -1,0 +1,13 @@
+# MoveInSync Ratings Analysis - dependencies
+
+# Play Store scraping
+google-play-scraper>=1.2.4
+
+# Data
+pandas>=2.2.0
+pyyaml>=6.0.1
+pydantic>=2.7.0
+python-dotenv>=1.0.1
+
+# LLM access (OpenRouter uses the OpenAI-compatible API)
+openai>=1.30.0

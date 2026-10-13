@@ -1,0 +1,10 @@
+apps:
+  - id: "com.moveinsync.ets"
+    name: "MoveInSync"
+country: "in"
+languages: ["en"]
+
+llm_model: "nvidia/nemotron-3-ultra-550b-a55b:free"
+# or
+
+prompt_version: "v1"
