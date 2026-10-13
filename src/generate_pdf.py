@@ -335,8 +335,9 @@ def build_pdf(filename="reports/MoveInSync_Ratings_Executive_Submission.pdf"):
     story.append(Spacer(1, 8))
 
     meta_table_data = [
+        [Paragraph("Live Dashboard Demo", t_header), Paragraph("https://moveinsync-ratings-jhanvi.streamlit.app/", t_cell)],
         [Paragraph("Repository URL", t_header), Paragraph("https://github.com/jhanvi-11/moveinsync-ratings", t_cell)],
-        [Paragraph("Dashboard Command", t_header), Paragraph("streamlit run app/dashboard.py", t_cell)],
+        [Paragraph("Local Run Command", t_header), Paragraph("streamlit run app/dashboard.py", t_cell)],
         [Paragraph("Core Views", t_header), Paragraph("1. Overview & Rolling Timeline (2014-2026)<br/>2. Complaint Taxonomy Pareto & Suspected Ownership<br/>3. Rating Lift Simulator & Prioritized Action Tickets", t_cell)],
         [Paragraph("Data Storage", t_header), Paragraph("Local SQLite (data/reviews.db) with 24,318 deduplicated reviews", t_cell)]
     ]

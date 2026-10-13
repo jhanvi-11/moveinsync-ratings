@@ -13,7 +13,7 @@
 
 **App:** `com.moveinsync.ets` &nbsp;|&nbsp; **Market:** India &nbsp;|&nbsp; **App rating:** ⭐ 4.64 from 114,881 ratings
 
-[📊 Dashboard](app/dashboard.py) · [📝 Memo](reports/memo.md) · [🔬 Method note](reports/method_note.md) · [📌 Assumptions](reports/assumptions.md) · [🎯 Scope](reports/scope.md) · [🏷️ Taxonomy](prompts/taxonomy.md)
+[🌐 Live Dashboard](https://moveinsync-ratings-jhanvi.streamlit.app/) · [📝 Memo](reports/memo.md) · [🔬 Method note](reports/method_note.md) · [📌 Assumptions](reports/assumptions.md) · [🎯 Scope](reports/scope.md) · [🏷️ Taxonomy](prompts/taxonomy.md)
 
 </div>
 
@@ -146,7 +146,7 @@ python src/classify.py --limit 30 # small test run first
 python src/classify.py            # full run (spends API credits)
 python src/analyze.py
 
-# 4. Launch the interactive dashboard
+# 4. Launch the interactive dashboard (or view live: https://moveinsync-ratings-jhanvi.streamlit.app/)
 streamlit run app/dashboard.py
 ```
 
