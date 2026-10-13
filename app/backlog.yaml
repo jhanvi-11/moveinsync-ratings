@@ -1,0 +1,112 @@
+# Ticket notes shown in the dashboard backlog. Keyed by taxonomy theme.
+# Source: reports/memo.md. Hypotheses are unverified suspicions from review text.
+
+crash_lag:
+  ticket: "Ticket 1"
+  action: "Fix"
+  team: "Engineering"
+  hypothesis: "Startup or update-path failure, possibly specific to certain devices or Android versions."
+  validate: "Pull crash and ANR rates by app version, Android version and device. Check whether reports cluster after updates."
+  change: "Fix the top crash and startup clusters. Move to staged rollouts with an automatic halt when the crash rate rises."
+  accept: "Fixes for the top 3 crash clusters shipped; a crash-free-rate target set once the baseline is known."
+  metric: "crash_lag falls from about 16% to under 8% of 1-2 star reviews within 60 days."
+  effort: "Medium effort, high impact"
+
+login_otp:
+  ticket: "Ticket 2"
+  action: "Fix"
+  team: "Engineering, Backend, client IT"
+  hypothesis: "OTP delivery failures (SMS or email provider), session expiry causing repeated logins, company single sign-on errors."
+  validate: "Measure OTP send-to-verify success by channel and provider; review session and token expiry; count login errors by company or SSO path."
+  change: "Decided after validation. Candidates: provider fallback, alternate-channel resend, specific error messages instead of blank screens. Any OTP expiry or caching change needs a security review."
+  accept: "OTP delivery success measurable per channel with an agreed target; every failure state shows a specific message."
+  metric: "login_otp under 6% of 1-2 star reviews within 60 days."
+  effort: "Medium effort, high impact"
+
+wrong_route_eta:
+  ticket: "Ticket 3"
+  action: "Investigate"
+  team: "Backend routing, Product"
+  hypothesis: "ETA model or map-service issues, or route sequencing. Some of it may be operational, such as driver deviations."
+  validate: "Compare predicted and actual pickup times on a sample of trips; check whether complaints cluster by city or shift."
+  change: "Decided after the audit. A plausible first step is showing an ETA range and a 'last updated' time on the map."
+  accept: "Baseline ETA error measured and a target agreed with Product."
+  metric: "Route, ETA and tracking together under 10% of 1-2 star reviews within 90 days."
+  effort: "High effort, medium-to-high impact"
+
+live_tracking_gps:
+  ticket: "Ticket 3"
+  action: "Investigate"
+  team: "Backend routing, Product"
+  hypothesis: "Location updates are infrequent or stale, or the map layer lags behind the vehicle."
+  validate: "Check location-update frequency from vehicles during the pickup window and compare with what the app shows."
+  change: "Decided after the audit. Show a 'last updated' time on the map as a first step."
+  accept: "Update frequency measured and a target agreed."
+  metric: "Route, ETA and tracking together under 10% of 1-2 star reviews within 90 days."
+  effort: "High effort, medium impact"
+
+booking_failure:
+  ticket: "Next in queue"
+  action: "Investigate"
+  team: "Engineering, Backend"
+  hypothesis: "Booking flow errors, confirmation or waitlist states not communicated, and cancellations the user did not expect."
+  validate: "Count failed booking attempts by error type and by platform (mobile vs. web); review auto-cancel and waitlist rules."
+  change: "Decided after validation. Candidates: clearer booking states and a dispute path for wrongly tagged no-shows."
+  accept: "Booking failure rate measured and an agreed target."
+  metric: "booking_failure share of 1-2 star reviews falls by half within 90 days."
+  effort: "Medium effort, medium impact"
+
+cab_late_no_show:
+  ticket: "Operations"
+  action: "Operations"
+  team: "Operations, vendors"
+  hypothesis: "Mostly a vendor and dispatch problem, not an app problem."
+  validate: "Compare complaint volume with on-time pickup data by vendor and shift."
+  change: "Vendor SLAs and ops action. App changes alone will not fix this."
+  accept: "On-time pickup rate tracked per vendor."
+  metric: "cab_late_no_show falls as vendor on-time rate rises."
+  effort: "Ops-led"
+
+support_unresponsive:
+  ticket: "Support"
+  action: "Fix"
+  team: "Support"
+  hypothesis: "Replies are fast (median under 1 day) but generic, so users feel unheard."
+  validate: "Review how many public replies are templates and what share lead to a resolved ticket."
+  change: "Replace boilerplate with short fix paths per theme (OTP, won't open, booking)."
+  accept: "Theme-specific reply templates live."
+  metric: "support_unresponsive share of 1-2 star reviews falls within 60 days."
+  effort: "Low effort, medium impact"
+
+rating_prompt:
+  ticket: "Quick win"
+  action: "Fix"
+  team: "Product"
+  hypothesis: "The rating prompt is repeated or cannot be skipped, which can produce a 1-star on its own."
+  validate: "Ask the internal team when and how the prompt is shown."
+  change: "Show a neutral prompt after a successful trip, make it skippable, show it to everyone. Do not route unhappy users away from the Play Store."
+  accept: "Prompt is skippable and shown once per trip at most."
+  metric: "rating_prompt complaints fall to near zero."
+  effort: "Low effort, small impact"
+
+ui_confusion:
+  ticket: "Monitor"
+  action: "Monitor"
+  team: "Product"
+  hypothesis: "Complaints about the new layout exist but are a small share."
+  validate: "Re-check as reviews accumulate."
+  change: "No rollback or redesign for now."
+  accept: "n/a"
+  metric: "Share stays near its current level."
+  effort: "n/a"
+
+update_issue:
+  ticket: "Monitor"
+  action: "Monitor"
+  team: "Product, Engineering"
+  hypothesis: "Complaints tied directly to an update are a small share."
+  validate: "Re-test per release as reviews accumulate."
+  change: "No rollback."
+  accept: "n/a"
+  metric: "Share stays near its current level."
+  effort: "n/a"

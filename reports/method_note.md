@@ -106,20 +106,21 @@ Compared 1-2 star complaint shares in the last 30 days ($n = 60$) against the pr
 
 ## 6. Tools & Methodological Reproducibility
 
-- **Stack**: Python 3.13, `google-play-scraper`, `pandas`, `sqlite3`, `pydantic`, `OpenRouter API`.
-- **Reproducibility Pipeline**:
+- **Stack**: Python 3.13, `google-play-scraper`, `pandas`, `sqlite3`, `pydantic`, `streamlit`, `plotly`, `OpenRouter API`.
+- **Reproducibility Pipeline & Interface**:
   - [`src/baseline.py`](../src/baseline.py): Captures daily store metadata.
   - [`src/scrape.py`](../src/scrape.py): Pulls incremental reviews.
   - [`src/clean.py`](../src/clean.py): Cleans and tags languages.
   - [`src/classify.py`](../src/classify.py): Classifies via taxonomy.
   - [`src/agreement.py`](../src/agreement.py): Computes Kappa vs. gold labels.
   - [`src/analyze.py`](../src/analyze.py): Exports lift models and theme shares to `data/out/`.
+  - [`app/dashboard.py`](../app/dashboard.py): Interactive read-only review intelligence dashboard.
 
 ---
 
 ## 7. Limitations & Caveats
 
-1. **Reviewer Selection Bias**: While 85.5% of store ratings are 5-star, 28% of written reviews are 1-2 star. Findings reflect friction among vocal reviewers.
+1. **Reviewer Selection Bias**: While 85.5% of app ratings are 5-star, 28% of written reviews are 1-2 star. Findings reflect friction among vocal reviewers.
 2. **Sample Coverage**: Due to API credits, 31% of eligible reviews were classified. While sufficient for high statistical confidence, shares represent point estimates.
 3. **Subjective Ownership**: Suspected owners reflect user perceptions. Technical bugs may stem from corporate IT proxies or telecom carriers rather than MoveInSync code.
 4. **Vague Residual Bucket**: 17.7% of complaints fall into `other` / unclassifiable text, meaning named functional shares are conservative lower bounds.

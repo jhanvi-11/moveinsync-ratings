@@ -8,7 +8,7 @@
 ## The Answer in One Minute
 
 ### What is happening
-The public store rating is **4.64 from 114,881 ratings** (85.5% are 5-star, 7.1% are 1-2 star). People who take the time to write reviews are far less happy: the **last-90-day written-review average is 3.81**, with **28% rated at 1-2 stars**. This is essentially flat against the prior 90 days (3.82 average, 27% low-star). 
+The public app rating is **4.64 from 114,881 ratings** (85.5% are 5-star, 7.1% are 1-2 star). People who take the time to write reviews are far less happy: the **last-90-day written-review average is 3.81**, with **28% rated at 1-2 stars**. This is essentially flat against the prior 90 days (3.82 average, 27% low-star). 
 
 This is a **chronic pattern**, not a sudden collapse: the written average has crept up gradually from 3.45 in 2022 to 3.85 in 2026. Because written reviews naturally skew toward negative feedback, these figures describe vocal reviewers rather than the entire passive user base.
 
@@ -106,7 +106,7 @@ Lift estimates apply to the **90-day written-review average (3.81)**:
 - **Conservative case**: Assumes affected low-star reviews improve to 3 stars.
 - **Optimistic case**: Assumes affected reviews improve to match the non-complaint average (~4.3 stars).
 - **Combined impact**: Remedying the top 3 themes yields a projected lift of **+0.20 to +0.40** on the written review average.
-- **Store rating context**: Because public written reviews represent only ~20% of total ratings, and the cumulative score (4.64) is anchored by 114,881 ratings, the overall store score will move incrementally. The rolling 90-day window provides the accurate measure of progress.
+- **App rating context**: Because public written reviews represent only ~20% of total ratings, and the cumulative score (4.64) is anchored by 114,881 ratings, the overall store score will move incrementally. The rolling 90-day window provides the accurate measure of progress.
 
 ---
 
@@ -114,7 +114,7 @@ Lift estimates apply to the **90-day written-review average (3.81)**:
 
 ### Quick Wins (Weeks 1–2)
 1. **Theme-Specific Developer Replies**: The team already replies to **54.6% of 1-2 star reviews** with a fast median response time of **0.9 days**. However, generic templates redirecting riders to support emails or facilities desks provide little value. Replace boilerplate with targeted self-help paths (e.g., OTP troubleshooting, reinstall advice for update freezes).
-2. **Neutral, Unbiased Rating Prompt**: Trigger the store rating prompt solely after a successful trip completion. Ensure it is easily skippable, offered to all riders, and paired with an in-app feedback channel for issues. Never gate store reviews based on sentiment.
+2. **Neutral, Unbiased Rating Prompt**: Trigger the app rating prompt solely after a successful trip completion. Ensure it is easily skippable, offered to all riders, and paired with an in-app feedback channel for issues. Never gate store reviews based on sentiment.
 3. **Audit App Permissions**: Investigate the subset of complaints citing invasive or repetitive permission requests to ensure only necessary runtime location access is requested.
 
 ### Mid-Term (Months 1–2)
@@ -134,7 +134,7 @@ Lift estimates apply to the **90-day written-review average (3.81)**:
 ---
 
 ## The Repeatable Intelligence Engine
-Whenever leadership asks *"How are our Play Store ratings trending?"*, this repository provides the automated answer:
+Whenever leadership asks *"How are our Play App ratings trending?"*, this repository provides the automated answer:
 - [`src/baseline.py`](file:///d:/moveinsync-ratings/src/baseline.py): Captures public ratings and histogram snapshots.
 - [`src/scrape.py`](file:///d:/moveinsync-ratings/src/scrape.py): Pulls incoming reviews incrementally.
 - [`src/clean.py`](file:///d:/moveinsync-ratings/src/clean.py): Filters and normalizes text and languages.

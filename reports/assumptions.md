@@ -2,12 +2,12 @@
 
 1. **Scope:** MoveInSync employee app only (`com.moveinsync.ets`), country India. Partner apps (Driver app, transport admin portals) and competitors are excluded.
 2. **Reported Experiences vs. Root Causes:** Review text describes commuter-reported experiences and symptoms, not confirmed technical root causes. Suspected owner tags (`app_engineering`, `backend_routing`, `operations`, `client_policy`, `support_process`, `unclear`) are working hypotheses requiring internal engineering/telemetry validation.
-3. **Public Review Selection Bias:** Public written reviews skew significantly negative (28% at 1-2 stars in the last 90 days) compared to the overall store rating (7.1% at 1-2 stars). Sample metrics describe vocal reviewers, not the silent majority.
-4. **Store Rating vs. Rolling Window:** Store rating is cumulative and anchored across 114,881 ratings (headroom is small). Primary performance and lift impact are therefore evaluated against the **rolling 90-day window**.
+3. **Public Review Selection Bias:** Public written reviews skew significantly negative (28% at 1-2 stars in the last 90 days) compared to the overall app rating (7.1% at 1-2 stars). Sample metrics describe vocal reviewers, not the silent majority.
+4. **Store Rating vs. Rolling Window:** App rating is cumulative and anchored across 114,881 ratings (headroom is small). Primary performance and lift impact are therefore evaluated against the **rolling 90-day window**.
 5. **Misdirected Reviews:** Feedback from drivers, vendors, or admins reviewing their partner role rather than the employee rider journey is flagged as `misdirected_review` and excluded from rider friction themes.
 6. **Languages:** English, Hindi (Devanagari script), and Hinglish (Romanized Hindi) reviews are classified directly without translation. Non-English volume is under 1% of the corpus.
 7. **Data Access Boundary:** Analysis is strictly bounded to public Google Play Store data. Internal application crash logs, APM traces, customer support tickets, and in-app rating-prompt trigger logic were not accessible.
-8. **Text Coverage:** Analysis covers written reviews only (~23,626 reviews), which represent a subset (~20%) of all store ratings.
+8. **Text Coverage:** Analysis covers written reviews only (~23,626 reviews), which represent a subset (~20%) of all app ratings.
 9. **Classified Sample & Credit Constraints:** 
    - Eligible universe: 3,178 reviews (last 24 months, $\ge 3$ words).
    - Classified sample: 990 reviews (~31%) spanning February to October 2026, processed newest-first due to API credit limits.

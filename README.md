@@ -8,11 +8,12 @@
 ![SQLite](https://img.shields.io/badge/Storage-SQLite-003B57?logo=sqlite&logoColor=white)
 ![LLM](https://img.shields.io/badge/Classification-LLM%20via%20OpenRouter-7C3AED)
 ![Pydantic](https://img.shields.io/badge/Validation-Pydantic-E92063?logo=pydantic&logoColor=white)
+![Streamlit](https://img.shields.io/badge/Dashboard-Streamlit-FF4B4B?logo=streamlit&logoColor=white)
 ![Status](https://img.shields.io/badge/Pipeline-Repeatable-2EA44F)
 
-**App:** `com.moveinsync.ets` &nbsp;|&nbsp; **Market:** India &nbsp;|&nbsp; **Store rating:** ⭐ 4.64 from 114,881 ratings
+**App:** `com.moveinsync.ets` &nbsp;|&nbsp; **Market:** India &nbsp;|&nbsp; **App rating:** ⭐ 4.64 from 114,881 ratings
 
-[📝 Memo](reports/memo.md) · [🔬 Method note](reports/method_note.md) · [📌 Assumptions](reports/assumptions.md) · [🎯 Scope](reports/scope.md) · [🏷️ Taxonomy](prompts/taxonomy.md)
+[📊 Dashboard](app/dashboard.py) · [📝 Memo](reports/memo.md) · [🔬 Method note](reports/method_note.md) · [📌 Assumptions](reports/assumptions.md) · [🎯 Scope](reports/scope.md) · [🏷️ Taxonomy](prompts/taxonomy.md)
 
 </div>
 
@@ -20,7 +21,7 @@
 
 ## 🔍 The answer in 30 seconds
 
-The 4.64 store rating hides a very different story among people who write reviews.
+The 4.64 app rating hides a very different story among people who write reviews.
 
 | | Store (all ratings) | Written reviews (last 90 days) |
 | :--- | :---: | :---: |
@@ -144,6 +145,9 @@ python src/clean.py
 python src/classify.py --limit 30 # small test run first
 python src/classify.py            # full run (spends API credits)
 python src/analyze.py
+
+# 4. Launch the interactive dashboard
+streamlit run app/dashboard.py
 ```
 
 > 💡 Everything except `classify.py` is free and needs no key.
@@ -159,6 +163,12 @@ moveinsync-ratings/
 ├── config.yaml              apps, country, languages, model, prompt version
 ├── prompts/
 │   └── taxonomy.md          taxonomy and labelling rules fed to the LLM
+├── app/
+│   ├── dashboard.py         interactive Streamlit dashboard
+│   ├── charts.py            Plotly visualizations & figure builders
+│   ├── loaders.py           cached SQLite & snapshot CSV loaders
+│   ├── backlog.yaml         ticket backlog and owner action metadata
+│   └── theme.py             color tokens and UI styling
 ├── src/
 │   ├── baseline.py          store score + star histogram snapshot
 │   ├── scrape.py            incremental review ingestion
@@ -168,7 +178,7 @@ moveinsync-ratings/
 │   └── analyze.py           themes, owners, lift simulation, version checks
 ├── data/
 │   ├── reviews.db           SQLite: reviews, reviews_clean, reviews_llm
-│   ├── rating_snapshots.csv store rating history, one row per run
+│   ├── rating_snapshots.csv app rating history, one row per run
 │   ├── gold_labels.csv      80 sampled reviews with checked labels
 │   ├── gold_overlap.csv     gold rows inside the classified set
 │   └── out/                 analysis output tables
@@ -208,10 +218,10 @@ Add `OPENROUTER_API_KEY` as a repository secret first. The classify step spends 
 
 ## 🛠️ Tools used
 
-Python · `google-play-scraper` · pandas · SQLite · pydantic · an LLM via OpenRouter · an AI assistant for planning, code drafting and a first draft of gold labels. Every script was run and checked against the store histogram and manual reading of the reviews.
+Python · `google-play-scraper` · pandas · SQLite · pydantic · Streamlit · Plotly · an LLM via OpenRouter · an AI assistant for planning, code drafting and a first draft of gold labels. Every script was run and checked against the store histogram and manual reading of the reviews.
 
 <div align="center">
 
-*Built to answer "How are our Play Store ratings?" every time it is asked.*
+*Built to answer "How are our Play App ratings?" every time it is asked.*
 
 </div>
